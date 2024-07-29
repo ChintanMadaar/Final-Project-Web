@@ -1,40 +1,42 @@
 import React, { useEffect, useState } from "react";
-import { exerciseOptions, fetchData } from "../utils/fetchData";
 import HorizontalScrollbar from "./HorizontalScrollbar";
+import { exerciseOptions, fetchData } from "../utils/fetchData";
 
 const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
   const [search, setSearch] = useState("");
   const [bodyParts, setBodyParts] = useState([]);
 
   useEffect(() => {
-    const fetchBodyParts = async () => {
+    const fetchExercisesData = async () => {
       try {
-        const data = await fetchData(
+        const bodyPartsData = await fetchData(
           "https://exercisedb.p.rapidapi.com/exercises/bodyPartList",
           exerciseOptions
         );
-        console.log("Body parts data:", data);
-        setBodyParts(["all", ...data]);
+
+        if (Array.isArray(bodyPartsData)) {
+          setBodyParts(["all", ...bodyPartsData]);
+        } else {
+          console.error("bodyPartsData is not an array:", bodyPartsData);
+        }
       } catch (error) {
-        console.error("Error fetching body parts:", error);
+        console.error("Failed to fetch body parts data:", error);
       }
     };
 
-    fetchBodyParts();
+    fetchExercisesData();
   }, []);
 
   const handleSearch = async () => {
     if (search) {
       try {
-        const exercises = await fetchData(
-          "https://exercisedb.p.rapidapi.com/exercises/bodyPartList",
+        const exercisesData = await fetchData(
+          "https://exercisedb.p.rapidapi.com/exercises",
           exerciseOptions
         );
-        console.log("Exercises data:", exercises);
 
-        // Checking if exercises is an array
-        if (Array.isArray(exercises)) {
-          const filteredExercises = exercises.filter(
+        if (Array.isArray(exercisesData)) {
+          const searchedExercises = exercisesData.filter(
             (item) =>
               item.name.toLowerCase().includes(search) ||
               item.target.toLowerCase().includes(search) ||
@@ -43,45 +45,44 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
           );
 
           window.scrollTo({ top: 1800, left: 100, behavior: "smooth" });
-          setExercises(filteredExercises);
+
           setSearch("");
+          setExercises(searchedExercises);
         } else {
-          console.error(
-            "Error: exercises is not an array. Received:",
-            exercises
-          );
+          console.error("exercisesData is not an array:", exercisesData);
         }
       } catch (error) {
-        console.error("Error fetching exercises:", error);
+        console.error("Failed to fetch exercises data:", error);
       }
     }
   };
 
   return (
-    <div className="text-center p-5">
-      <h1 className="font-bold text-3xl mb-12">
+    <div className="flex flex-col items-center mt-9 justify-center p-5">
+      <h1 className="font-bold text-4xl lg:text-5xl mb-12 text-center">
         Awesome Exercises You <br /> Should Know
       </h1>
-      <div className="relative mb-16 w-full lg:w-128 mx-auto">
+      <div className="relative mb-18">
         <input
-          type="text"
+          className="h-16 lg:w-[1170px] w-[350px] bg-white rounded-full p-3 font-bold border-none"
           value={search}
           onChange={(e) => setSearch(e.target.value.toLowerCase())}
           placeholder="Search Exercises"
-          className="w-full p-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500 pr-16"
+          type="text"
         />
         <button
+          className="bg-red-600 text-white font-normal absolute right-0 top-0 mt-2 mr-2 rounded-full h-14 lg:h-12 lg:w-44 w-20 text-lg lg:text-xl"
           onClick={handleSearch}
-          className="absolute top-0 right-0 h-full bg-red-500 text-white py-2 px-6 rounded-full focus:outline-none focus:ring-2 focus:ring-red-500"
         >
           Search
         </button>
       </div>
-      <div className="w-full p-5">
+      <div className="relative w-full p-5">
         <HorizontalScrollbar
           data={bodyParts}
-          bodyPart={bodyPart}
+          bodyParts
           setBodyPart={setBodyPart}
+          bodyPart={bodyPart}
         />
       </div>
     </div>
