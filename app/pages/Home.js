@@ -9,7 +9,7 @@ const Home = () => {
   const [bodyPart, setBodyPart] = useState("all");
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-200 min-h-screen">
       {" "}
       <HeroBanner />
       <SearchExercises
