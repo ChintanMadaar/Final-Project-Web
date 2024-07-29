@@ -1,8 +1,10 @@
+// exerciseOptions and youtubeOptions with headers for API requests
+
 export const exerciseOptions = {
   method: "GET",
   headers: {
     "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
-    "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
+    "X-RapidAPI-Key": "8cf1d14a85msh9227ab8218f3575p1addc9jsn0bcb8d4975e3", // Ensure this environment variable is set correctly
   },
 };
 
@@ -10,13 +12,29 @@ export const youtubeOptions = {
   method: "GET",
   headers: {
     "X-RapidAPI-Host": "youtube-search-and-download.p.rapidapi.com",
-    "X-RapidAPI-Key": "063436f879mshdbab3e70a282cbcp103bd4jsn7978db7c2176",
+    "X-RapidAPI-Key": "8cf1d14a85msh9227ab8218f3575p1addc9jsn0bcb8d4975e3",
   },
 };
-
+// Function to fetch data with improved error handling and logging
 export const fetchData = async (url, options) => {
-  const res = await fetch(url, options);
-  const data = await res.json();
+  try {
+    console.log("Fetching data from URL:", url);
+    console.log("With options:", options);
 
-  return data;
+    const response = await fetch(url, options);
+
+    if (!response.ok) {
+      // Read and log the response text for detailed error information
+      const errorDetails = await response.text();
+      throw new Error(
+        `HTTP error! Status: ${response.status}, Details: ${errorDetails}`
+      );
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Fetch data error:", error.message);
+    throw error; // Rethrow the error after logging it
+  }
 };
