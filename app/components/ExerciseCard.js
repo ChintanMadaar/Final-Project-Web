@@ -1,8 +1,8 @@
 import React from "react";
 
 const ExerciseCard = ({ exercise }) => (
-  <Link
-    to={`/exercise/${exercise.id}`}
+  <a
+    href={`/exercise/${exercise.id}`}
     className="block p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
   >
     <img
@@ -22,7 +22,7 @@ const ExerciseCard = ({ exercise }) => (
     <h3 className="mt-3 text-xl font-bold text-black capitalize">
       {exercise.name}
     </h3>
-  </Link>
+  </a>
 );
 
 export default ExerciseCard;
