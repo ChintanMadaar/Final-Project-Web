@@ -37,4 +37,8 @@ export const fetchData = async (url, options) => {
     console.error("Fetch data error:", error.message);
     throw error; // Rethrow the error after logging it
   }
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 692c18853dcc5083421540fe30eb3eaf70465bba
