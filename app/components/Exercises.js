@@ -18,7 +18,13 @@ const Exercises = ({ exercises = [], setExercises, bodyPart }) => {
             : `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`;
 
         exercisesData = await fetchData(url, exerciseOptions);
-        setExercises(exercisesData);
+
+        if (Array.isArray(exercisesData)) {
+          setExercises(exercisesData);
+          setCurrentPage(1); // Reset to the first page when bodyPart changes
+        } else {
+          console.error("Fetched data is not an array:", exercisesData);
+        }
       } catch (error) {
         console.error("Failed to fetch exercises:", error);
       }
@@ -39,7 +45,8 @@ const Exercises = ({ exercises = [], setExercises, bodyPart }) => {
   const handlePageChange = (page) => {
     if (page > 0 && page <= totalPages) {
       setCurrentPage(page);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Remove or comment out this line to prevent scrolling to the top
+      // window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -56,24 +63,28 @@ const Exercises = ({ exercises = [], setExercises, bodyPart }) => {
         ))}
       </div>
       {totalPages > 1 && (
-        <div className="mt-14 flex justify-center items-center">
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="bg-gray-300 text-gray-800 p-2 rounded-l-lg hover:bg-gray-400"
-            >
-              Previous
-            </button>
-            <span className="text-lg font-semibold">{currentPage}</span>
-            <button
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className="bg-gray-300 text-gray-800 p-2 rounded-r-lg hover:bg-gray-400"
-            >
-              Next
-            </button>
-          </div>
+        <div className="mt-14 flex justify-center items-center space-x-2">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={`bg-gray-300 text-gray-800 p-3 rounded-lg hover:bg-gray-400 transition-colors duration-300 ${
+              currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+          >
+            Previous
+          </button>
+          <span className="text-lg font-semibold">
+            {currentPage} / {totalPages}
+          </span>
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={`bg-gray-300 text-gray-800 p-3 rounded-lg hover:bg-gray-400 transition-colors duration-300 ${
+              currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+          >
+            Next
+          </button>
         </div>
       )}
     </div>

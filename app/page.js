@@ -1,26 +1,37 @@
-import Image from "next/image";
-// import App from "./App";
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Home from "./pages/Home";
-<<<<<<< HEAD
 import ExerciseDetail from "./pages/ExerciseDetail";
-=======
-import ExerciseDtl from "./pages/ExerciseDtl";
->>>>>>> 692c18853dcc5083421540fe30eb3eaf70465bba
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import SimilarExercises from "./components/SimilarExercises"; // Import this component if you need it
 
 export default function Page() {
+  // State to track the selected exercise
+  const [selectedExercise, setSelectedExercise] = useState(null);
+
+  // Sample data for similar exercises; replace with actual data
+  const targetMuscleExercises = []; // Replace with actual data
+  const equipmentExercises = []; // Replace with actual data
+
   return (
-    <main className=" bg-white min-h-screen">
+    <main className="bg-white min-h-screen">
       <div className="text-black">
         <Navbar />
-        <Home />
-<<<<<<< HEAD
-        <ExerciseDetail />
-=======
-        <ExerciseDtl />
->>>>>>> 692c18853dcc5083421540fe30eb3eaf70465bba
+
+        {/* Conditionally render Home or ExerciseDetail based on selection */}
+        {!selectedExercise ? (
+          <Home onExerciseSelect={setSelectedExercise} />
+        ) : (
+          <div>
+            <ExerciseDetail exerciseDetail={selectedExercise} />
+            <SimilarExercises
+              targetMuscleExercises={targetMuscleExercises}
+              equipmentExercises={equipmentExercises}
+            />
+          </div>
+        )}
+
         <Footer />
       </div>
     </main>

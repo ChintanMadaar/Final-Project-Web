@@ -1,24 +1,32 @@
-import React from 'react';
-import { Typography, Box, Stack } from '@mui/material';
-
-import HorizontalScrollbar from './HorizontalScrollbar';
-import Loader from './Loader';
+import React from "react";
+import HorizontalScrollbar from "./HorizontalScrollbar";
+import Loader from "./Loader";
 
 const SimilarExercises = ({ targetMuscleExercises, equipmentExercises }) => (
-  <Box sx={{ mt: { lg: '100px', xs: '0px' } }}>
-    <Typography sx={{ fontSize: { lg: '44px', xs: '25px' }, ml: '20px' }} fontWeight={700} color="#000" mb="33px">
-      Similar <span style={{ color: '#FF2625', textTransform: 'capitalize' }}>Target Muscle</span> exercises
-    </Typography>
-    <Stack direction="row" sx={{ p: 2, position: 'relative' }}>
-      {targetMuscleExercises.length !== 0 ? <HorizontalScrollbar data={targetMuscleExercises} /> : <Loader />}
-    </Stack>
-    <Typography sx={{ fontSize: { lg: '44px', xs: '25px' }, ml: '20px', mt: { lg: '100px', xs: '60px' } }} fontWeight={700} color="#000" mb="33px">
-      Similar <span style={{ color: '#FF2625', textTransform: 'capitalize' }}>Equipment</span> exercises
-    </Typography>
-    <Stack direction="row" sx={{ p: 2, position: 'relative' }}>
-      {equipmentExercises.length !== 0 ? <HorizontalScrollbar data={equipmentExercises} /> : <Loader />}
-    </Stack>
-  </Box>
+  <div className="mt-[100px] lg:mt-24 xs:mt-0">
+    <h2 className="text-[25px] lg:text-[44px] font-bold ml-5 text-black mb-8">
+      Similar <span className="text-[#FF2625] capitalize">Target Muscle</span>{" "}
+      exercises
+    </h2>
+    <div className="p-2 relative flex overflow-x-auto">
+      {targetMuscleExercises.length !== 0 ? (
+        <HorizontalScrollbar data={targetMuscleExercises} />
+      ) : (
+        <Loader />
+      )}
+    </div>
+    <h2 className="text-[25px] lg:text-[44px] font-bold ml-5 text-black mt-[60px] lg:mt-24 mb-8">
+      Similar <span className="text-[#FF2625] capitalize">Equipment</span>{" "}
+      exercises
+    </h2>
+    <div className="p-2 relative flex overflow-x-auto">
+      {equipmentExercises.length !== 0 ? (
+        <HorizontalScrollbar data={equipmentExercises} />
+      ) : (
+        <Loader />
+      )}
+    </div>
+  </div>
 );
 
 export default SimilarExercises;
