@@ -2,6 +2,7 @@ import React from "react";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import BodyPart from "./BodyPart";
 import ExerciseCard from "./ExerciseCard";
+import Image from "next/image";
 import RightArrowIcon from "../assets/icons/right-arrow.png";
 import LeftArrowIcon from "../assets/icons/left-arrow.png";
 import "../App.css"; // Make sure to provide the correct path to app.css
@@ -12,9 +13,15 @@ const LeftArrow = () => {
   return (
     <div
       onClick={() => scrollPrev()}
-      className="flex items-center justify-center cursor-pointer p-2 bg-gray-200 rounded-full absolute left-0 top-1/2 transform -translate-y-1/2"
+      className="flex items-center justify-center cursor-pointer p-2 bg-gray-200 rounded-full absolute left-0 top-1/2 transform -translate-y-1/2 z-10"
     >
-      <img src={LeftArrowIcon} alt="left-arrow" className="w-6 h-6" />
+      <Image
+        src={LeftArrowIcon} // Use imported image here
+        alt="left-arrow"
+        width={24} // Adjust width as needed
+        height={24} // Adjust height as needed
+        className="object-contain"
+      />
     </div>
   );
 };
@@ -25,9 +32,15 @@ const RightArrow = () => {
   return (
     <div
       onClick={() => scrollNext()}
-      className="flex items-center justify-center cursor-pointer p-2 bg-gray-200 rounded-full absolute right-0 top-1/2 transform -translate-y-1/2"
+      className="flex items-center justify-center cursor-pointer p-2 bg-gray-200 rounded-full absolute right-0 top-1/2 transform -translate-y-1/2 z-10"
     >
-      <img src={RightArrowIcon} alt="right-arrow" className="w-6 h-6" />
+      <Image
+        src={RightArrowIcon} // Use imported image here
+        alt="right-arrow"
+        width={24} // Adjust width as needed
+        height={24} // Adjust height as needed
+        className="object-contain"
+      />
     </div>
   );
 };
