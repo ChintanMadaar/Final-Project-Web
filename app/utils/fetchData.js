@@ -15,13 +15,17 @@ export const youtubeOptions = {
     "X-RapidAPI-Key": "8cf1d14a85msh9227ab8218f3575p1addc9jsn0bcb8d4975e3",
   },
 };
+
 // Function to fetch data with improved error handling and logging
 export const fetchData = async (url, options) => {
   try {
-    console.log("Fetching data from URL:", url);
+    // Append the limit query parameter to the URL
+    const urlWithLimit = `${url}?limit=250`;
+
+    console.log("Fetching data from URL:", urlWithLimit);
     console.log("With options:", options);
 
-    const response = await fetch(url, options);
+    const response = await fetch(urlWithLimit, options);
 
     if (!response.ok) {
       // Read and log the response text for detailed error information

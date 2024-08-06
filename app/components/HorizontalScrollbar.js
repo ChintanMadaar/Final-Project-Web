@@ -1,48 +1,46 @@
-import React, { useContext } from "react";
+import React from "react";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
-import Image from "next/image"; // Import Image from next/image
-
-// Import images at the top
+import BodyPart from "./BodyPart";
+import ExerciseCard from "./ExerciseCard";
 import RightArrowIcon from "../assets/icons/right-arrow.png";
 import LeftArrowIcon from "../assets/icons/left-arrow.png";
 
-import ExerciseCard from "./ExerciseCard";
-import BodyPart from "./BodyPart";
-
 const LeftArrow = () => {
-  const { scrollPrev } = useContext(VisibilityContext);
-
+  const { scrollPrev } = React.useContext(VisibilityContext);
   return (
     <div
       onClick={() => scrollPrev()}
-      className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full cursor-pointer"
+      className="flex items-center justify-center cursor-pointer p-2 bg-gray-200 rounded-full"
     >
-      <Image src={LeftArrowIcon} alt="left-arrow" width={24} height={24} />
+      <img src={LeftArrowIcon} alt="left-arrow" className="w-6 h-6" />
     </div>
   );
 };
 
 const RightArrow = () => {
-  const { scrollNext } = useContext(VisibilityContext);
-
+  const { scrollNext } = React.useContext(VisibilityContext);
   return (
     <div
       onClick={() => scrollNext()}
-      className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full cursor-pointer"
+      className="flex items-center justify-center cursor-pointer p-2 bg-gray-200 rounded-full"
     >
-      <Image src={RightArrowIcon} alt="right-arrow" width={24} height={24} />
+      <img src={RightArrowIcon} alt="right-arrow" className="w-6 h-6" />
     </div>
   );
 };
 
 const HorizontalScrollbar = ({ data, bodyParts, setBodyPart, bodyPart }) => (
-  <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
+  <ScrollMenu
+    LeftArrow={LeftArrow}
+    RightArrow={RightArrow}
+    className="overflow-hidden whitespace-nowrap"
+  >
     {data.map((item) => (
       <div
         key={item.id || item}
         itemId={item.id || item}
         title={item.id || item}
-        className="m-2 flex-shrink-0"
+        className="flex-shrink-0 mx-2"
       >
         {bodyParts ? (
           <BodyPart item={item} setBodyPart={setBodyPart} bodyPart={bodyPart} />
