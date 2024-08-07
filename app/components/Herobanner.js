@@ -5,7 +5,9 @@ import HeroBannerImage from "../assets/images/banner.png";
 const HeroBanner = () => (
   <div className="relative p-5 mt-20 sm:ml-12 lg:mt-52 flex items-center justify-between">
     <div className="max-w-lg">
-      <h1 className="text-red-600 font-semibold text-2xl">Fitness Club</h1>
+      <h1 className="text-red-600 font-semibold text-5xl lg:text-6xl mb-4">
+        Fitness Club
+      </h1>
       <h2 className="font-bold text-3xl lg:text-4xl mb-6 mt-8">
         Sweat, Smile <br />
         And Repeat
@@ -28,8 +30,8 @@ const HeroBanner = () => (
         src={HeroBannerImage}
         alt="hero-banner"
         layout="intrinsic"
-        width={600} // Increased width
-        height={400} // Increased height
+        width={600}
+        height={400}
         className="object-cover"
       />
     </div>
