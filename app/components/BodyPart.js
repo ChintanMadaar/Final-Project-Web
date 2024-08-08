@@ -7,7 +7,7 @@ const BodyPart = ({ item, setBodyPart, bodyPart, scrollTo }) => (
     onClick={() => {
       setBodyPart(item);
       if (scrollTo) {
-        scrollTo(); // Ensure this function is being called correctly
+        scrollTo();
       }
     }}
     className={`flex flex-col items-center justify-center cursor-pointer gap-4 p-6 rounded-lg transition-all duration-300
@@ -17,8 +17,8 @@ const BodyPart = ({ item, setBodyPart, bodyPart, scrollTo }) => (
     <Image
       src={Icon}
       alt="Body part icon"
-      width={64} // Adjust width as needed
-      height={64} // Adjust height as needed
+      width={64}
+      height={64}
       className="object-contain"
     />
     <h3 className="text-lg md:text-xl font-semibold text-gray-700 capitalize">

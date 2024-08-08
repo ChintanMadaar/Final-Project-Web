@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Exercises from "../components/Exercises";
 import SearchExercises from "../components/SearchExercises";
-import HeroBanner from "../components/Herobanner"; // Fixed the component name to match naming conventions
+import HeroBanner from "../components/Herobanner";
 
 const Home = () => {
   const [exercises, setExercises] = useState([]);

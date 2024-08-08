@@ -21,7 +21,7 @@ const Exercises = ({ exercises = [], setExercises, bodyPart }) => {
 
         if (Array.isArray(exercisesData)) {
           setExercises(exercisesData);
-          setCurrentPage(1); // Reset to the first page when bodyPart changes
+          setCurrentPage(1);
         } else {
           console.error("Fetched data is not an array:", exercisesData);
         }
@@ -45,8 +45,6 @@ const Exercises = ({ exercises = [], setExercises, bodyPart }) => {
   const handlePageChange = (page) => {
     if (page > 0 && page <= totalPages) {
       setCurrentPage(page);
-      // Remove or comment out this line to prevent scrolling to the top
-      // window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 

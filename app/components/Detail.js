@@ -28,8 +28,8 @@ const Detail = ({ exerciseDetail }) => {
         src={gifUrl}
         alt={name}
         layout="responsive"
-        width={500} // Adjust width as needed
-        height={300} // Adjust height as needed
+        width={500}
+        height={300}
         className="rounded-lg"
       />
       <div className="flex flex-col gap-8 lg:gap-12">
@@ -44,12 +44,7 @@ const Detail = ({ exerciseDetail }) => {
         {extraDetail?.map((item) => (
           <div key={item.name} className="flex items-center gap-6">
             <button className="bg-yellow-100 rounded-full p-4 w-24 h-24 flex items-center justify-center">
-              <Image
-                src={item.icon}
-                alt={item.name}
-                width={48} // Adjust width as needed
-                height={48} // Adjust height as needed
-              />
+              <Image src={item.icon} alt={item.name} width={48} height={48} />
             </button>
             <p className="text-2xl lg:text-3xl capitalize text-gray-800">
               {item.name}
